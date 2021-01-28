@@ -11,7 +11,7 @@ const genSig = (query, secret) => {
   return signature
 }
 
-const test = async () => {
+const test_GET = async () => {
   let timestamp = new Date().getTime()
   let query = {
     timestamp
@@ -25,6 +25,31 @@ const test = async () => {
   console.log(request)
   let ret = await axios.get(request, { headers })
   console.log(ret)
+}
+
+const test_POST = async () => {
+  let query = {
+    asset: 'USDT',
+    timestamp: new Date().getTime()
+  }
+  let queryStr = queryString.stringify(query)
+  let signature = genSig(queryStr, API_SECRET)
+  let headers = {
+    'X-MBX-APIKEY': API_KEY
+  }
+  let request = `${HOST}/sapi/v1/asset/dust?${queryStr}&signature=${signature}`
+  console.log(request)
+  try {
+    let ret = await axios.post(request, {}, { headers })
+    console.log(ret)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const test = async () => {
+  await test_GET()
+  await test_POST()
 }
 
 test()

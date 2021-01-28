@@ -1,5 +1,5 @@
 {
-  "name": "sapi auth demo",
+  "name": "sapi",
   "version": "1.0.0",
   "description": "sapi auth demo",
   "main": "index.js",
