@@ -23,8 +23,12 @@ const test_GET = async () => {
   }
   let request = `${HOST}/sapi/v1/capital/config/getall?timestamp=${timestamp}&signature=${signature}`
   console.log(request)
-  let ret = await axios.get(request, { headers })
-  console.log(ret)
+  try {
+    let ret = await axios.get(request, { headers })
+    console.log(ret)
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 const test_POST = async () => {
